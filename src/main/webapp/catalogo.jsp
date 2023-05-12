@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1" import="com.productos.negocio.*"%>
-
+<!DOCTYPE html>
 <html lang="es">
 <head>
 	<meta charset="UTF-8">
@@ -28,7 +28,6 @@
   			out.print(prod.consultarTodo());
   		%>
   	</div>
-	</div>
 	<footer>
 	<ul >
 		<li><a href="https://www.facebook.com/" class="enlace-footer">Facebook</a></li>
