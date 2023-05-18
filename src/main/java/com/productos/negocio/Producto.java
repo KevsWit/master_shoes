@@ -193,8 +193,8 @@ public class Producto {
 				setId(rs.getInt(1));
 				setCat(rs.getInt(2));
 				setNombre(rs.getString(3));
-				setPrecio(rs.getFloat(4));
-				setCantidad(rs.getInt(5));
+				setPrecio(rs.getFloat(5));
+				setCantidad(rs.getInt(4));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
