@@ -48,7 +48,7 @@ out.println(usuario);
 </h4>
 	<% 
   		Producto prod=new Producto();
-  		String str_categoria=request.getParameter("cmbCategoria");
+		String str_categoria=request.getParameter("cmbCategoria");
   		int cat=Integer.parseInt(str_categoria);
   		out.print(prod.consultarProducto(cat));
   		%>
