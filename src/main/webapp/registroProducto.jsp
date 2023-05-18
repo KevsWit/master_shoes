@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1" session="true" import="com.productos.seguridad.*"%>
+	pageEncoding="ISO-8859-1" import="com.productos.negocio.*"%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -23,8 +23,7 @@
        	<a href="contacto.jsp">Contactos</a>
   	</nav>
 	<div align="center" style="padding: 40px; background-color: #D6D6D6;">
-
-<%
+  		<%
 String usuario;
 HttpSession sesion = request.getSession();
  if (sesion.getAttribute("usuario") == null) //Se verifica si existe la variable
@@ -40,20 +39,28 @@ HttpSession sesion = request.getSession();
  usuario=(String)sesion.getAttribute("usuario"); //Se devuelve los valores de atributos
  int perfil=(Integer)sesion.getAttribute("perfil");
  %>
-<h1>Sitio Privado de Productos</h1>
+ 	<h1>Ingresar un producto</h1>
 <h4>Bienvenido
 <%
 out.println(usuario);
-%>
-</h4>
-<%
-Pagina pag=new Pagina();
-String menu=pag.mostrarMenu(perfil);
-out.print(menu);
  }
 %>
-    
-
+<%
+	Producto prod=new Producto();
+	String str_id = request.getParameter("id");
+	int id = Integer.parseInt(str_id);
+	String str_categoria=request.getParameter("cmbCategoria");
+	int cat=Integer.parseInt(str_categoria);
+	String nombre=request.getParameter("nombre");
+	String str_cant=request.getParameter("cantidad");
+	int cantidad=Integer.parseInt(str_cant);
+	String str_precio=request.getParameter("precio");
+	double precio=Double.parseDouble(str_precio);
+	out.print(prod.ingresarProducto(id, cat, nombre, cantidad, precio, ""));
+	
+%>
+</h4>
+	
   	</div>
 	<footer>
 	<ul >
@@ -64,6 +71,3 @@ out.print(menu);
 </main>
 </body>
 </html>
-            
-
-    

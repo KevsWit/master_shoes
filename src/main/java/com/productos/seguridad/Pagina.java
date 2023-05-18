@@ -43,7 +43,7 @@ public class Pagina {
 	rs=con.Consulta(sql);
 	while(rs.next())
 	{
-	menu+="<li><a href="+rs.getString(3)+"accesskey="+rs.getInt(1)+">"+rs.getString(2)+
+	menu+="<li><a href="+rs.getString(3)+" accesskey="+rs.getInt(1)+">"+rs.getString(2)+
 	"</A></li>";
 	}
 	menu+="</ul>";
