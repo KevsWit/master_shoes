@@ -168,10 +168,11 @@ public class Producto {
 				tabla += "<tr>"
 						+ "<td><pre style=\"text-align: center\">"+rs.getInt(1)+"</pre></td>"
 						+ "<td><pre style=\"text-align: center\">"+rs.getString(2)+"</pre></td>"
-						+ "<td><pre style=\"text-align: center\">"+rs.getFloat(3)+"</pre></td>"
-						+ "<td><pre style=\"text-align: center\">"+rs.getInt(4)+"</pre></td>"
+						+ "<td><pre style=\"text-align: center\">"+rs.getFloat(4)+"</pre></td>"
+						+ "<td><pre style=\"text-align: center\">"+rs.getInt(3)+"</pre></td>"
 						+ "<td><a href= buscarProducto.jsp?cod="+rs.getInt(1)+"><pre style=\"text-align: center\">Modificar</pre></a></td>"
 						+ "<td><a href= eliminarProducto.jsp?cod="+rs.getInt(1)+"><pre style=\"text-align: center\">Eliminar</pre></a></td>"
+						+ "<td><a href= ofertarProducto.jsp?cod="+rs.getInt(1)+"><pre style=\"text-align: center\">Poner en oferta</pre></a></td>"
 						+ "</tr>";
 			}
 			tabla += "</table>";
@@ -228,5 +229,59 @@ public class Producto {
 			f = false;
 		}
 		return f;
+	}
+	public boolean ofertarProducto(int cod) {
+		boolean f = false;
+		Conexion con=new Conexion();
+		String sql = "UPDATE tb_producto SET estado_pr = 'OFERTA',precio_of=precio_pr*0.4 WHERE id_pr="+cod+";";
+		try {
+			con.Ejecutar(sql);
+			f = true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			f = false;
+		}
+		return f;
+	}
+	public String consultarOfertas()
+	{
+		String sql="SELECT nombre_pr, cantidad_pr, precio_pr, precio_of FROM tb_producto"
+				+ " WHERE estado_pr LIKE '%OFERTA%';";
+		Conexion con=new Conexion();
+		String tabla="<table border=2><th>Producto</th><th>Cantidad</th><th>Precio</th><th>Precio Oferta</th>";
+		ResultSet rs=null;
+		rs=con.Consulta(sql);
+		try {
+			while(rs.next())
+			{
+				tabla+="<tr><td>"+rs.getString(1)+"</td>"
+				+ "<td>"+rs.getInt(2)+"</td>"
+				+ "<td>"+rs.getDouble(3)+"</td>"
+				+ "<td>"+rs.getDouble(4)+"</td>"
+				+ "</td></tr>";
+			}
+		} catch (SQLException e) {
+		// TODO Auto-generated catch block
+			e.printStackTrace();
+			//System.out.print(e.getMessage());
+		}
+		tabla+="</table>";
+		return tabla;
+	}
+	public boolean ModificarClave(String user, String nclave) {
+		boolean agregado = false;
+		Conexion con=new Conexion();
+		String sql = "UPDATE tb_usuario"
+				+ "	SET clave_us='"+nclave+"'"
+				+ "	WHERE login_us LIKE '%"+user+"%';";
+
+		try {
+			con.Ejecutar(sql);
+			agregado = true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			agregado = false;
+		}
+		return agregado;
 	}
 }
